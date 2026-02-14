@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)https://zeyuxie29.github.io/FakeSound2/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>FakeSound2</title>
+    <link href="./DemoFile/bootstrap.min.css" rel="stylesheet">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      td {
+        vertical-align: middle;
+      }
+      audio {
+        width: 20vw;
+        min-width: 100px;
+        max-width: 250px;
+      }
+      .btn:hover {
+        background-color: #399a89 !important;;
+        color: rgb(255, 255, 255) !important;
+      }
+    
+      .custom-color {
+        color: #038670;
+      }
+
+      .spectra {
+        flex: 0 0 24%; 
+        border: 0px solid #ddd;
+        border-radius: 8px;
+        padding: 5px;
+        margin: 5px;
+        text-align: center;    
+            
+      }
+      .spectra img {
+        max-width: 100%;
+        width:auto;       
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+      }
+      .spectra img:hover {
+        transform: scale(1.6); 
+        z-index: 2;
+      }
+
+      footer {
+        background-color: #009980;
+        color: #fff;
+        text-align: center;
+        padding: 8px 0;
+      }
+
+     .metadata {
+        background: linear-gradient(to right, #ebf3f8, #e9fef3);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+        border-left: 5px solid #78c4f8;
+      }
+      
+      .metadata:hover {
+        transform: translateY(-1px);
+      }
+
+      .subtitle {
+        background: linear-gradient(to right, #78c4f8, #7ee9ae);
+        color: white;
+        padding: 5px;
+        min-width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        border-radius: 15px;
+      }
+
+      .fixed-navbar {
+          position: fixed;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          align-items: center;
+          top: -100px; 
+          width: 100%;
+          background: linear-gradient(135deg, #e8eef9 0%, #e9eee9 100%);;
+          backdrop-filter: blur(10px);
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+          border-radius: 0 0 12px 12px;
+
+          z-index: 1000;
+          padding: 5px 160px;
+          transition: top 0.5s ease;
+          text-align: center; 
+      }
+      
+
+      
+    
+      
+      .btn {
+          display: inline-block;
+          padding: 8px 16px;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          white-space: nowrap;
+      }
+
+      
+      .nav-btn.btn{
+          background: transparent;
+          /* background: rgba(255, 255, 255, 0.7);
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); */
+          color: #333;
+          font-weight: 600;   
+      }
+      
+      .nav-btn:hover {
+          background: #038670;
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(3, 134, 112, 0.4);
+      }
+      
+      .nav-btn.active {
+          background: #038670;
+          color: white;
+      }
+      
+      .divider {
+          color: #aaa;
+          font-weight: bold;
+          padding: 0 10px;
+      }
+      
+      .highlight {
+          background: rgba(3, 134, 112, 0.1);
+          padding: 15px;
+          border-left: 4px solid #038670;
+          border-radius: 0 5px 5px 0;
+          margin: 20px 0;
+      }
+
+     
+      
+      @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+          40% {transform: translateY(-10px);}
+          60% {transform: translateY(-5px);}
+      }
+
+      @media (max-width: 768px) {
+          .nav-buttons {
+              flex-direction: column;
+              align-items: center;
+          }
+          
+          .divider {
+              display: none;
+          }
+          
+          .btn {
+              width: 100%;
+              text-align: center;
+              margin-bottom: 5px;
+          }
+          
+          body {
+              padding-top: 220px;
+          }
+      }
+      
+      @media (max-width: 480px) {
+          .nav-title {
+              font-size: 0.9rem;
+          }
+          
+          .btn {
+              font-size: 0.85rem;
+              padding: 6px 12px;
+          }
+          
+          body {
+              padding-top: 250px;
+          }
+      }
+
+
+    </style>
+
+    <link rel="icon" type="image/png" href="./DemoFile/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./DemoFile/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./DemoFile/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./DemoFile/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="FakeSound2" />
+    <link rel="manifest" href="./DemoFile/favicon/site.webmanifest" />
+
+  </head>
+  <body>
+    
+    <nav class="fixed-navbar" id="scrollNav"> 
+      <a href="#navigation" class="btn nav-btn">Navigation Bar</a>     
+      <a href="#overview" class="btn nav-btn" style="color: #038670;">Data Construction</a>
+      <a href="#analysis" class="btn nav-btn" >Analysis</a>
+      <a href="#sample-Genereration" class="btn nav-btn" style="color: #038670;">Deepfake Samples</a> 
+      <a href="#top" class="btn nav-btn">⬆ Return to Top ⬆</a>
+      <a href="https://github.com/zeyuxie29/FakeSound2" class="btn nav-btn" style="color: #038670;" target="_blank" rel="noopener noreferrer">Github Evaluation Code</a>
+    </nav>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const scrollNav = document.getElementById('scrollNav');
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition > 20) {
+                scrollNav.style.top = '0';
+            } else {
+                scrollNav.style.top = '-100px';
+            }
+        });
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                  window.scrollTo({
+                      top: targetElement.offsetTop - 100,
+                      behavior: 'smooth'
+                  });
+                }
+            });
+        });
+        
+       
+
+    </script>
+
+    
+
+    <div class="container pt-5 mt-5 shadow p-4 mb-5 bg-white rounded" id="top">
+      <div class="text-center">
+        <div style="display: flex; align-items: center; justify-content: center;">
+          <img src="./DemoFile/favicon/web-app-manifest-512x512.png" alt="FakeSound2_icon" style="width: 60px; height: 60px; margin-right: 5px; margin-bottom: 5px; border-radius: 15px;">
+          <h1 style="margin-right: 20px;"><span class="custom-color">FakeSound2</span></h1>  
+        </div>
+        <h3>A Benchmark for Explainable and Generalizable Deepfake Sound Detection</h3>
+        <p class="lead fw-bold">
+          | <a href="https://arxiv.org/abs/2509.17162" target="_blank" class="btn fw-bold">Paper</a> 
+          | <a href="https://github.com/zeyuxie29/FakeSound2" class="btn fw-bold" target="_blank" rel="noopener noreferrer">Evaluation Code</a> 
+          | <a href="https://huggingface.co/datasets/ZeyuXie/FakeSound2" class="btn fw-bold" target="_blank" rel="noopener noreferrer">Data</a> 
+          |
+        </p>
+        <p class="fst-italic mb-0">
+          <span class="author-block">
+            <a href="https://scholar.google.de/citations?user=LzSAnHMAAAAJ&hl=en&oi=ao" >Zeyu Xie</a> <sup>1</sup>,
+          </span>
+          <span class="author-block">
+            <a href="https://scholar.google.de/citations?user=e0h0ae8AAAAJ&hl=en&oi=ao">Xuenan Xu</a> <sup>2</sup>,
+          </span>
+          <span class="author-block">
+            Yongkang Yin <sup>1</sup>,
+          </span>
+          <span class="author-block">
+            <a href="https://scholar.google.com/citations?user=-ZMMe-UAAAAJ&hl=zh-CN&oi=ao">Chenxing Li</a> <sup>3</sup>,
+          </span>
+          <span class="author-block">
+            <a href="https://scholar.google.de/citations?user=9cvRM5wAAAAJ&hl=en&oi=ao">Mengyue Wu</a> <sup>2</sup>,
+          </span>
+          <span class="author-block">
+            <a href="https://scholar.google.com/citations?user=sfyr7zMAAAAJ&hl=zh-CN&oi=ao">Yuexian Zou</a> <sup>1</sup>
+          </span>
+        </p>
+        <p></p>
+      </div>
+      
+      <div style="text-align: center">
+        <span class="author-block"><sup>1</sup> ADSP Lab, Peking University</span>
+        <span class="author-block"><sup>2</sup> X-LANCE Lab, Shanghai Jiao Tong University</span>
+        <span class="author-block"><sup>3</sup> Tencent AI Lab</span>
+        <p></p>
+      </div>
+      <div style="text-align: center">
+        <i>zeyuxie25@stu.pku.edu.cn</i>
+      </div>
+      <p>
+        <b><p class="custom-color">Abstract.</p></b>  
+        <p style="padding-left: 1em;  padding-right: 1em;">
+          The rapid development of generative audio raises ethical and security concerns stemming from forged data, making deepfake sound detection an important safeguard against the malicious use of such technologies. 
+          Although prior studies have explored this task, existing methods largely focus on binary classification and fall short in explaining <b class="custom-color">how</b> manipulations occur, tracing <b class="custom-color">where</b> the sources originated, or <b class="custom-color">generalizing</b> to unseen sources—thereby limiting the explainability and reliability of detection.
+          To address these limitations, we present <b class="custom-color">FakeSound2</b>, a benchmark designed to advance deepfake sound detection beyond binary accuracy. 
+          FakeSound2 evaluates models across three dimensions: localization, traceability, and generalization, covering <b class="custom-color">6</b> manipulation types and <b class="custom-color">12</b> diverse sources.
+          Experimental results show that although current systems achieve high classification accuracy, they struggle to recognize forged pattern distributions and provide reliable explanations. 
+          By highlighting these gaps, FakeSound2 establishes a comprehensive benchmark that reveals key challenges and aims to foster robust, explainable, and generalizable approaches for trustworthy audio authentication.
+          </p>
+      </p>
+      <br>
+    <!-- </div>
+      
+    <div class="container pt-5 mt-5 shadow p-4 mb-5 bg-white rounded"> -->
+      <!-- #e8eef9 0%, #e9eee9 100% -->
+      <!-- #e2ecfe 0%, #eaf7ea 100% -->
+      <b class="custom-color" id="navigation">Navigation Bar.</b>
+      <div style="padding-left: 1em;  padding-right: 1em;">
+      <div style="text-align: center; background: linear-gradient(135deg, #e8eef9 0%, #e9eee9 100%); margin: 5px auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);">
+        <a href="#overview" class="btn" style="color: #038670;">Data Construction&rArr;</a>
+        <a href="#description" class="btn  fw-bold">1. <u>Task Description</u></a>
+        <a href="#pipeline" class="btn  fw-bold">2. <u>Pipeline</u></a>
+        <a href="#statistic" class="btn  fw-bold">3. <u>Data Statistics</u></a>
+        &emsp;&ensp;|&emsp;&ensp;
+        <a href="#analysis" class="btn" style="color: #038670;">Analysis&rArr;</a>
+        <a href="#visualization" class="btn  fw-bold">4. <u>Visualization</u></a>
+        <a href="#limitations" class="btn  fw-bold">5. <u>Model Limitations</u></a>
+      </div>
+      </div>
+      <br>
+      <b class="custom-color">Deepfake Samples.</b>
+      <br>
+      <div style="padding-left: 1em;  padding-right: 1em;">
+      <div style="text-align: center; background: linear-gradient(135deg, #e9eee9 0%, #e8eef9 100%); margin: 5px auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);">
+        <a href="#sample-Genereration" class="btn" style="color: #038670;">Clip-wise&rArr;</a>
+        <a href="#sample-Genereration" class="btn  fw-bold">1. <u>Genereration</u></a>
+        <a href="#sample-Editing" class="btn  fw-bold">2. <u>Editing</u></a>
+        &ensp;|&ensp;
+        <a href="#sample-Inpainting" class="btn" style="color: #038670;">Frame-wise&rArr;</a>
+        <a href="#sample-Inpainting" class="btn  fw-bold">3. <u>Inpainting</u></a>
+        <a href="#sample-Separation" class="btn  fw-bold">4. <u>Separation</u></a>
+        <a href="#sample-Splice" class="btn  fw-bold">5. <u>Splice</u></a>
+        <a href="#sample-Addition" class="btn fw-bold">6. <u>Addition</u></a>
+      </div>
+      </div>
+    </div>
+    
+    <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+        <h2 id="overview" style="text-align: center;" class="custom-color">FakeSound2 Construction</h2>
+        <br>
+        <h3 id="description" class="custom-color">1. Task Description </h3>
+        <br>
+        <div style="text-align: left;  padding-left: 4em;  padding-right: 4em;">
+            The explainable deepfake detection need identify the manipulation method (<b class="custom-color">how</b>), localize the temporal positions of forgery (<b class="custom-color">when</b>), and trace the accountable sources (<b class="custom-color">where</b>).
+        </div>
+        <br>
+        <p style="text-align: center;">
+            <img src="./DemoFile/figures/Fakesound_sample.png" height="160" width="600" class="img-fluid">
+        </p>
+        <br>
+        <br>
+
+        <h3 id="pipeline" class="custom-color">2. Manipulation Pipeline </h3>
+        <br>
+        <div style="text-align: left; padding-left: 4em;  padding-right: 4em;">
+          <b class="custom-color">(I)</b> A Text-to-Audio grounding model temporally localizes sound events and masks segments;
+          <b class="custom-color">(II)</b> Based on the task type, the LLM generates the target captions and insert event descriptions;
+          <b class="custom-color">(III)</b> Depending on the task requirements, relevant models or scripts are invoked to generate synthetic audio segments; frame-wise forgeries are seamlessly spliced according to the masked regions.
+        </div>
+        <br>
+        <p style="text-align: center;">
+            <img src="./DemoFile/figures/Fakesound_pipeline.png" height="400" width="1100" class="img-fluid">
+        </p>
+        <br>
+        <br>
+
+        <h3 id="statistic" class="custom-color">3. Data Statistics </h3>
+        <div style="text-align: left; padding-left: 4em;  padding-right: 4em;">
+        <br>
+        <div class="subtitle">Statistics</div>
+        <br>
+        Constructed through an automated pipeline leveraging the AudioCaps dataset, it encompasses <b class="custom-color">6</b> distinct manipulation types derived from <b class="custom-color">12</b> audio sources (<b class="custom-color">11</b> synthetic and <b class="custom-color">1</b> genuine).
+        The dataset ultimately comprises a training set of <b class="custom-color">369,929</b> samples and a test set of <b class="custom-color">5,553</b> samples. 
+        Researchers can flexibly partition the test subset to evaluate generalization, provided that out-of-domain (OOD) sources remain completely unseen during training.
+        <!-- For instance, in our implementation, the test set is divided into 3,896 in-domain and 1,657 OOD samples to systematically benchmark cross-domain detection robustness. -->
+        </div>
+        <br>
+        <p style="text-align: center;">
+            <img src="./DemoFile/figures/Fakesound_statistic.png" height="400" width="1100" class="img-fluid">
+        </p>
+        
+       
+        <div style="text-align: left; padding-left: 4em;  padding-right: 4em;">
+            <div class="subtitle">Metadata</div>
+            <div class="metadata">
+                <h3>The annotation is organized as:</h3>
+            
+                <div class="code-block" style="line-height: 2;">
+                    <span style="color: #b5b5b5;">// Dictionary Structure</span><br>
+                    {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>fake_type</strong>": "Inpainting", <span style="color: #b5b5b5;">// Type of manipulation (e.g., inpainting, editing, ...)</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>model</strong>": "AudioLDM2", <span style="color: #b5b5b5;">// Source of the manipulated audio (e.g., AudioLDM2, Tango2, ...)</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>audio_id</strong>": "xxxxxxxxx", <span style="color: #b5b5b5;">// file ID</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>onset_offset</strong>": "2-3_5.5-6", <span style="color: #b5b5b5;">// Temporal timestamps of the forged segments</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>filepath</strong>": "data/test/audio/inpainting_ldm2/xxxxxxxxx.wav", <span style="color: #b5b5b5;">// Filepath to the audio file</span><br>  
+                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>target_caption</strong>": "a man talks, a dog barks", <span style="color: #b5b5b5;">// Target caption generated by LLMs or rule-based scripts</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>add_event / splice_event</strong>": "a dog barks", <span style="color: #b5b5b5;">// Selected event to be inserted (Optional, in addition, splice, editing)</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>delete_event</strong>": "a sprayer sprays", <span style="color: #b5b5b5;">// Deleted event in original caption (Optional, in separation, addition, splice, editing)</span><br>
+                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;"<strong>original_caption</strong>":"a man talks, a sprayer sprays", <span style="color: #b5b5b5;">// Original caption in AudioCaps</span><br> -->
+                  }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+        <h2 id="analysis" style="text-align: center;" class="custom-color">Analysis</h2>
+        <br>
+
+        <h3 id="visualization" class="custom-color">4. Feature Visualization </h3>
+        <br>
+        <div style="text-align: left; padding-left: 4em;  padding-right: 4em;">
+          Overall, the current model exhibits reliable separability between authentic and manipulated audio, enabling <b class="custom-color">effective binary classification</b>. 
+          However, certain forged audio categories demonstrate substantial overlap in the feature space, which <b class="custom-color">diminishes explainability</b> for source attribution.
+        </div>
+        <br>
+        <p style="text-align: center;">
+            <img src="./DemoFile/figures/Fakesound_visualization.png" height="400" width="1100" class="img-fluid">
+        </p>
+        <br>
+        <br> 
+        
+        <h3 id="limitations" class="custom-color">5. Limitations and Challenges of Current Models </h3>
+        <br>
+        <div style="text-align: left; padding-left: 3em;  padding-right: 3em;">
+          Although current models perform well in binary classification, they exhibit the following shortcomings:
+          <br> 
+          <br> 
+          <ul>
+            <li>
+            <span class="custom-color">Limitation&rArr;</span> Difficulty in distinguishing between deepfake audio generated by similar manipulation frameworks.
+            <br> 
+            <span class="custom-color">Challenge&rArr;</span> enable models to capture fine-grained distributional discrepancies.
+            </li>
+            <br> 
+            <li>
+            <span class="custom-color">Limitation&rArr;</span> Limited generalization capability. 
+            <br> 
+            <span class="custom-color">Challenge&rArr;</span> enable models to characterize the true data distribution of authentic audio rather than memorizing artificial forgery patterns.
+            </li>
+          </ul>
+        </div>
+    </div>
+
+
+    <div class="container pb-0 shadow p-5 mb-5 bg-white rounded">
+      <h2 id="sample-Genereration" class="custom-color"> Deepfake Samples </h2>
+      <p class="mb-0">
+      <br>
+
+      </p>
+      <div class="container pt-3 table-responsive">
+        <table class="table table-hover" id="supervision-efficiency-table" >
+
+          <thead>
+            <th style="text-align: center" colspan="4"><h4>1. Clip-<span class="custom-color">Generation</span></h4></th>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">A man talking while wood clanks<br>on a metal pan followed by gravel<br>crunching as food and oil sizzle.<br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">A man talking while wood clanks<br>on a metal pan followed by gravel<br>crunching as food and oil sizzle.<br><br></audio></td>   
+            </tr>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">None<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">Entire Clip (0-10s)<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Y_9mgOkzm-xg.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/generation_affusion_9mgOkzm-xg.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Y_9mgOkzm-xg.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/generation_affusion_9mgOkzm-xg.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">A man is speaking while typing.<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">A man is speaking while typing.<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">None<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">Entire Clip (0-10s)<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Y0ury8KHQdL4.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/generation_x2audio_Y0ury8KHQdL4_A_man_is_speaking_while_typing.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Y0ury8KHQdL4.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/generation_x2audio_Y0ury8KHQdL4_A_man_is_speaking_while_typing.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+          
+
+          <thead>
+          <tr><td style="border-bottom: none;" colspan="4" id="sample-Editing"><br></td></tr>         
+            <th style="text-align: center" colspan="4"><h4>2. Clip-<span class="custom-color">Editing</span></h4></th>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">Someone burps and then laughs.<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">Laughs while <span class="custom-color">bleating</span>.<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">Bleating<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">Entire Clip (0-10s)<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Y1FNJbN-eHY4.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/edit_ae_1FNJbN-eHY4_edit_someone-burps_laughs-while-goat-bleating.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Y1FNJbN-eHY4.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/edit_ae_1FNJbN-eHY4_edit_someone-burps_laughs-while-goat-bleating.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">A woman talks and a baby whispers.<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">A baby whispers while <span class="custom-color">a man speaks</span>.<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">A man speaks<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">Entire Clip (0-10s)<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Y_xylo5_IiaM.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/edit_ae_xylo5_IiaM_edit_a-woman-talks_a-baby-whispers-while-a-man-speaks.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Y_xylo5_IiaM.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/edit_ae_xylo5_IiaM_edit_a-woman-talks_a-baby-whispers-while-a-man-speaks.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr><td style="border-bottom: none;" colspan="4" id="sample-Inpainting"><br></td></tr>         
+              <th style="text-align: center" colspan="4"><h4>3. Frame-<span class="custom-color">Inpainting</span></h4></th>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">A group of people laughing<br>followed by farting.<br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">A group of people laughing<br>followed by farting.<br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">None<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">3.943-7.56s<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Y_w2pA1VeB40.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/inpainting_affusion__w2pA1VeB40_concat_3.943-7.56.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Y_w2pA1VeB40.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/inpainting_affusion__w2pA1VeB40_concat_3.943-7.56.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">A man speaking as rain lightly<br>falls followed by thunder.<br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">A man speaking as rain lightly<br>falls followed by thunder.<br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">None<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">0.244-6.872s<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Y-EQByFLFqig.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/inpainting_tango2_-EQByFLFqig_concat_0.244-6.872.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Y-EQByFLFqig.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/inpainting_tango2_-EQByFLFqig_concat_0.244-6.872.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr><td style="border-bottom: none;" colspan="4" id="sample-Separation"><br></td></tr>         
+              <th style="text-align: center" colspan="4"><h4>4. Frame-<span class="custom-color">Separation</span></h4></th>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">A man talking followed by<br>a series of belches.<br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">A series of belches.<br><br><br><br></audio></td>   
+            </tr> 
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">None<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">0.12-0.92s<br><br><br><br></audio></td>   
+            </tr>   
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/YalaxBd_EEUc.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/separation_fs_alaxBd_EEUc_concat_0.12-0.92.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/YalaxBd_EEUc.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/separation_fs_alaxBd_EEUc_concat_0.12-0.92.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">Birds chirping and bees buzzing.<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">Bees buzzing.<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">None<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">0.0-1.68_2.16-10.0s<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/YYqYCDis3EUA.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/separation_ln_YqYCDis3EUA_concat_0.0-1.68_2.16-10.0.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/YYqYCDis3EUA.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/separation_ln_YqYCDis3EUA_concat_0.0-1.68_2.16-10.0.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr><td style="border-bottom: none;" colspan="4"  id="sample-Splice"><br></td></tr>         
+              <th style="text-align: center" colspan="4"><h4>5. Frame-<span class="custom-color">Splice</span></h4></th>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">A man speaking as rain lightly<br>falls followed by thunder<br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">a man speaking as rain lightly<br>falls followed by thunder<br>and <span class="custom-color">a series of gunshots fire</span>.<br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">A series of gunshots fire<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">4.12-5.92s<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Y-EQByFLFqig.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/splice_-EQByFLFqig_concat_4.12-5.92.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Y-EQByFLFqig.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/splice_-EQByFLFqig_concat_4.12-5.92.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+         <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">A man speaking followed by<br>another man speaking with<br>some rustling<br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">A man speaking followed by<br>another man speaking with<br>some rustling as <span class="custom-color">a baby laughing</span>.<br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">A baby laughing<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">2.6-5.56s<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Y0jGH7A_hpBM.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/splice_0jGH7A_hpBM_concat_2.6-5.56.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Y0jGH7A_hpBM.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/splice_0jGH7A_hpBM_concat_2.6-5.56.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">Birds chirp and a duck quacks<br>followed by a dog barking.<br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">Birds chirp and a duck quacks<br>followed by a dog barking<br>and <span class="custom-color">a woman talking</span>.<br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">A woman talking<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">0.0-1.52s<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center;"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Ya3GzZKxUTy8.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center;"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/splice_a3GzZKxUTy8_concat_0.0-1.52.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center; color: #a0a0a0;"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Ya3GzZKxUTy8.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center; color: #a0a0a0;"><div class="spectra"><img src="./DemoFile/data/audio/audio/splice_a3GzZKxUTy8_concat_0.0-1.52.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr><td style="border-bottom: none;" colspan="4" id="sample-Addition"><br></td></tr>         
+              <th style="text-align: center" colspan="4"><h4>6. Frame-<span class="custom-color">Addition</span></h4></th>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">A man and woman laughing<br>followed by a man shouting<br>then a woman laughing as<br>a child laughs.</td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">a man and woman laughing<br>followed by a man shouting<br>then a woman laughing as<br>a child laughs and <span class="custom-color">a baby cries</span>.</audio></td> 
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">A baby cries<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">2.85-4.37s<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Y_AcJVyToQUQ.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/addition__AcJVyToQUQ_concat_2.85-4.37.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Y_AcJVyToQUQ.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/addition__AcJVyToQUQ_concat_2.85-4.37.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Original Caption</th>
+              <td style="text-align: center; color: #a0a0a0;">A man speaks with some<br>clinking and clanking.<br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">&emsp;&emsp;Target Caption&emsp;&emsp;</th>
+              <td style="text-align: center; color: #a0a0a0;">A man speaks with some<br>clinking and clanking while<br><span class="custom-color">music plays in the foreground</span>.<br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center; color: #a0a0a0;">Inserted event</th>
+              <td style="text-align: center; color: #a0a0a0;">Music plays in the foreground<br><br><br><br></td> 
+              <th style="text-align: center; color: #a0a0a0;">Fake Onset-Offset</th>
+              <td style="text-align: center; color: #a0a0a0;">5.78-8.38s<br><br><br><br></audio></td>   
+            </tr>  
+            <tr>
+              <th style="text-align: center">Original Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/gt_audio/Y-EaZ7EJJUl0.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+              <th style="text-align: center" class="custom-color">Manipulated Audio</th>
+              <td style="text-align: center"><audio controls="" controlslist="nodownload" class="px-1" style="margin-top: 25px; margin-bottom: 25px;"><source src="./DemoFile/data/audio/audio/addition_-EaZ7EJJUl0_concat_5.78-8.38.wav" type="audio/wav">Your browser does not support the audio element.</audio></td> 
+            </tr>
+            <tr>         
+              <th style="text-align: center">Original Spectra</th>    
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/gt_audio/Y-EaZ7EJJUl0.png" height="100" width="300"></div></td> 
+              <th style="text-align: center">Manipulated Spectra</th>   
+              <td style="text-align: center"><div class="spectra"><img src="./DemoFile/data/audio/audio/addition_-EaZ7EJJUl0_concat_5.78-8.38.png" height="100" width="300"></div></td>   
+            </tr>
+          </tbody>
+          
+        
+
+          <tbody>
+            <tr><td style="border-bottom: none;"><br></td>
+              <td style="border-bottom: none;"><br></td>
+              <td style="border-bottom: none;"><br></td>
+              <td style="border-bottom: none;"><br></td>
+            </tr>                  
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    
+
+    <div class="container pt-5 mt-5 shadow p-5 bg-white rounded">
+      <h3 id="category6" class="custom-color">Acknowledgement</h3> 
+        This dataset leverages multiple audio generation models, and we appreciate  their open-source contributions.
+          
+    </div>
+      
+    <footer>
+      &copy; 2025 FakeSound2
+    </footer>
+
+  
+</body></html>
