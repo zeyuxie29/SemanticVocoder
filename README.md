@@ -1,7 +1,7 @@
-# :mag_right: FakeSound2：A Benchmark for Explainable and Generalizable Deepfake Sound Detection
+# :mag_right: SemanticVocoder：A Benchmark for Explainable and Generalizable Deepfake Sound Detection
 [![arXiv](https://img.shields.io/badge/arXiv-2509.17162-brightgreen.svg?style=flat-square)](https://arxiv.org/abs/2509.17162)
-[![githubio](https://img.shields.io/badge/GitHub.io-Audio_Samples-blue?logo=Github&style=flat-square)](https://zeyuxie29.github.io/FakeSound2)
-[![Hugging Face data](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue)](https://huggingface.co/datasets/ZeyuXie/FakeSound2)
+[![githubio](https://img.shields.io/badge/GitHub.io-Audio_Samples-blue?logo=Github&style=flat-square)](https://zeyuxie29.github.io/SemanticVocoder)
+[![Hugging Face data](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue)](https://huggingface.co/datasets/ZeyuXie/SemanticVocoder)
 
 ### Table of Contents
 
@@ -20,15 +20,15 @@
 [![Hugging Face data](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue)](https://huggingface.co/datasets/ZeyuXie/FakeSound/tree/main)
 
 <a id="introduction"></a>
-### :collision: FakeSound2
-We present **FakeSound2**, a benchmark designed to advance deepfake sound detection beyond binary accuracy and evaluate models across three dimensions: 
+### :collision: SemanticVocoder
+We present **SemanticVocoder**, a benchmark designed to advance deepfake sound detection beyond binary accuracy and evaluate models across three dimensions: 
 localization, traceability, and generalization, covering **6** manipulation types and **12** diverse sources:
 * Localization: localize the temporal positions of forgery
 * Traceability: identify the manipulation method and trace the accountable sources
 * Generalization: generalizing to unseen sources
 
 ### :bulb: Limitations in Current Models
-Through extensive experimentation with FakeSound2, we demonstrate that although current detection systems achieve high classification accuracy, they exhibit significant **limitations** in recognizing nuanced forged pattern distributions and providing reliable explanatory capabilities.
+Through extensive experimentation with SemanticVocoder, we demonstrate that although current detection systems achieve high classification accuracy, they exhibit significant **limitations** in recognizing nuanced forged pattern distributions and providing reliable explanatory capabilities.
 
 ### :seedling: Inspiration
  Our findings highlight **two pivotal research directions** for advancing the field: 
@@ -46,7 +46,7 @@ Through extensive experimentation with FakeSound2, we demonstrate that although 
 ### Data Preparation
 For copyright reasons, please download the raw audio from the official [AudioCaps](https://audiocaps.github.io/).
 
-The FakeSound2 benchmark can be downloaded from [HuggingfaceDataset](https://huggingface.co/datasets/ZeyuXie/FakeSound2).
+The SemanticVocoder benchmark can be downloaded from [HuggingfaceDataset](https://huggingface.co/datasets/ZeyuXie/SemanticVocoder).
 
 The metadata is contained within *"meta/{}.json", with each line representing an individual sample in a dictionary format:
 ```python
@@ -65,7 +65,7 @@ The metadata is contained within *"meta/{}.json", with each line representing an
 ### Install Dependencies
 
 ```shell
-git clone https://github.com/zeyuxie29/FakeSound2
+git clone https://github.com/zeyuxie29/SemanticVocoder
 cd src
 conda install --yes --file requirements.txt
 ```

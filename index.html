@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0034)https://zeyuxie29.github.io/FakeSound2/ -->
+<!-- saved from url=(0034)https://zeyuxie29.github.io/SemanticVocoder/ -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>FakeSound2</title>
+    <title>SemanticVocoder</title>
     <link href="./DemoFile/bootstrap.min.css" rel="stylesheet">
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -194,7 +194,7 @@
     <link rel="icon" type="image/svg+xml" href="./DemoFile/favicon/favicon.svg" />
     <link rel="shortcut icon" href="./DemoFile/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="./DemoFile/favicon/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="FakeSound2" />
+    <meta name="apple-mobile-web-app-title" content="SemanticVocoder" />
     <link rel="manifest" href="./DemoFile/favicon/site.webmanifest" />
 
   </head>
@@ -206,7 +206,7 @@
       <a href="#analysis" class="btn nav-btn" >Analysis</a>
       <a href="#sample-Genereration" class="btn nav-btn" style="color: #038670;">Deepfake Samples</a> 
       <a href="#top" class="btn nav-btn">⬆ Return to Top ⬆</a>
-      <a href="https://github.com/zeyuxie29/FakeSound2" class="btn nav-btn" style="color: #038670;" target="_blank" rel="noopener noreferrer">Github Evaluation Code</a>
+      <a href="https://github.com/zeyuxie29/SemanticVocoder" class="btn nav-btn" style="color: #038670;" target="_blank" rel="noopener noreferrer">Github Evaluation Code</a>
     </nav>
 
     <script>
@@ -246,25 +246,18 @@
     <div class="container pt-5 mt-5 shadow p-4 mb-5 bg-white rounded" id="top">
       <div class="text-center">
         <div style="display: flex; align-items: center; justify-content: center;">
-          <img src="./DemoFile/favicon/web-app-manifest-512x512.png" alt="FakeSound2_icon" style="width: 60px; height: 60px; margin-right: 5px; margin-bottom: 5px; border-radius: 15px;">
-          <h1 style="margin-right: 20px;"><span class="custom-color">FakeSound2</span></h1>  
+          <img src="./DemoFile/favicon/web-app-manifest-512x512.png" alt="SemanticVocoder_icon" style="width: 60px; height: 60px; margin-right: 5px; margin-bottom: 5px; border-radius: 15px;">
+          <h1 style="margin-right: 20px;"><span class="custom-color">SemanticVocoder</span></h1>  
         </div>
-        <h3>A Benchmark for Explainable and Generalizable Deepfake Sound Detection</h3>
+        <h3>Bridging Audio Generation and Audio Understanding via Semantic Latents</h3>
         <p class="lead fw-bold">
           | <a href="https://arxiv.org/abs/2509.17162" target="_blank" class="btn fw-bold">Paper</a> 
-          | <a href="https://github.com/zeyuxie29/FakeSound2" class="btn fw-bold" target="_blank" rel="noopener noreferrer">Evaluation Code</a> 
-          | <a href="https://huggingface.co/datasets/ZeyuXie/FakeSound2" class="btn fw-bold" target="_blank" rel="noopener noreferrer">Data</a> 
+          | <a href="https://github.com/zeyuxie29/SemanticVocoder" class="btn fw-bold" target="_blank" rel="noopener noreferrer">Code</a> 
           |
         </p>
         <p class="fst-italic mb-0">
           <span class="author-block">
             <a href="https://scholar.google.de/citations?user=LzSAnHMAAAAJ&hl=en&oi=ao" >Zeyu Xie</a> <sup>1</sup>,
-          </span>
-          <span class="author-block">
-            <a href="https://scholar.google.de/citations?user=e0h0ae8AAAAJ&hl=en&oi=ao">Xuenan Xu</a> <sup>2</sup>,
-          </span>
-          <span class="author-block">
-            Yongkang Yin <sup>1</sup>,
           </span>
           <span class="author-block">
             <a href="https://scholar.google.com/citations?user=-ZMMe-UAAAAJ&hl=zh-CN&oi=ao">Chenxing Li</a> <sup>3</sup>,
@@ -291,12 +284,11 @@
       <p>
         <b><p class="custom-color">Abstract.</p></b>  
         <p style="padding-left: 1em;  padding-right: 1em;">
-          The rapid development of generative audio raises ethical and security concerns stemming from forged data, making deepfake sound detection an important safeguard against the malicious use of such technologies. 
-          Although prior studies have explored this task, existing methods largely focus on binary classification and fall short in explaining <b class="custom-color">how</b> manipulations occur, tracing <b class="custom-color">where</b> the sources originated, or <b class="custom-color">generalizing</b> to unseen sources—thereby limiting the explainability and reliability of detection.
-          To address these limitations, we present <b class="custom-color">FakeSound2</b>, a benchmark designed to advance deepfake sound detection beyond binary accuracy. 
-          FakeSound2 evaluates models across three dimensions: localization, traceability, and generalization, covering <b class="custom-color">6</b> manipulation types and <b class="custom-color">12</b> diverse sources.
-          Experimental results show that although current systems achieve high classification accuracy, they struggle to recognize forged pattern distributions and provide reliable explanations. 
-          By highlighting these gaps, FakeSound2 establishes a comprehensive benchmark that reveals key challenges and aims to foster robust, explainable, and generalizable approaches for trustworthy audio authentication.
+          Existing audio generation models typically rely on VAEs (Variational Autoencoders) and perform generation within the VAE latent space.
+          Although VAEs excel at compression and reconstruction, their latents naturally encapsulate low-level acoustic details rather than semantically discriminative information, leading to entangled event semantics and complicating the training of generative models.
+          To address these issues, we discard VAE acoustic latents and introduce semantic encoder latents, and thus propose <b class="custom-color">SemanticVocoder</b>, a generative vocoder which directly synthesizes waveforms from semantic latents.
+          Equipped with SemanticVocoder, our text-to-audio generation model achieves a lowest Fréchet Distance and Fréchet Audio Distance scores on the AudioCaps test set, as the introduced semantic latents exhibit better discriminability than the acoustic VAE latents.
+          While achieving better generation performance, it also serves as a promising trial toward unifying understanding and generation within shared semantic space.
           </p>
       </p>
       <br>
@@ -337,7 +329,7 @@
     </div>
     
     <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
-        <h2 id="overview" style="text-align: center;" class="custom-color">FakeSound2 Construction</h2>
+        <h2 id="overview" style="text-align: center;" class="custom-color">SemanticVocoder Construction</h2>
         <br>
         <h3 id="description" class="custom-color">1. Task Description </h3>
         <br>
@@ -844,7 +836,7 @@
     </div>
       
     <footer>
-      &copy; 2025 FakeSound2
+      &copy; 2026 SemanticVocoder
     </footer>
 
   
