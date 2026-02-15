@@ -202,11 +202,11 @@
     
     <nav class="fixed-navbar" id="scrollNav"> 
       <a href="#navigation" class="btn nav-btn">Navigation Bar</a>     
-      <a href="#overview" class="btn nav-btn" style="color: #038670;">Data Construction</a>
-      <a href="#analysis" class="btn nav-btn" >Analysis</a>
-      <a href="#sample-Genereration" class="btn nav-btn" style="color: #038670;">Deepfake Samples</a> 
+      <a href="#overview" class="btn nav-btn" style="color: #038670;">Pipeline</a>
+      <a href="#comparison" class="btn nav-btn" >Analysis</a>
+      <a href="#sample-Genereration" class="btn nav-btn" style="color: #038670;">Samples</a> 
       <a href="#top" class="btn nav-btn">⬆ Return to Top ⬆</a>
-      <a href="https://github.com/zeyuxie29/SemanticVocoder" class="btn nav-btn" style="color: #038670;" target="_blank" rel="noopener noreferrer">Github Evaluation Code</a>
+      <a href="https://github.com/zeyuxie29/SemanticVocoder" class="btn nav-btn" style="color: #038670;" target="_blank" rel="noopener noreferrer">Github Code</a>
     </nav>
 
     <script>
@@ -246,7 +246,7 @@
     <div class="container pt-5 mt-5 shadow p-4 mb-5 bg-white rounded" id="top">
       <div class="text-center">
         <div style="display: flex; align-items: center; justify-content: center;">
-          <img src="./DemoFile/favicon/web-app-manifest-512x512.png" alt="SemanticVocoder_icon" style="width: 60px; height: 60px; margin-right: 5px; margin-bottom: 5px; border-radius: 15px;">
+          <!-- <img src="./DemoFile/favicon/web-app-manifest-512x512.png" alt="SemanticVocoder_icon" style="width: 60px; height: 60px; margin-right: 5px; margin-bottom: 5px; border-radius: 15px;"> -->
           <h1 style="margin-right: 20px;"><span class="custom-color">SemanticVocoder</span></h1>  
         </div>
         <h3>Bridging Audio Generation and Audio Understanding via Semantic Latents</h3>
@@ -257,13 +257,13 @@
         </p>
         <p class="fst-italic mb-0">
           <span class="author-block">
-            <a href="https://scholar.google.de/citations?user=LzSAnHMAAAAJ&hl=en&oi=ao" >Zeyu Xie</a> <sup>1</sup>,
+            <a href="https://scholar.google.de/citations?user=LzSAnHMAAAAJ&hl=en&oi=ao" >Zeyu Xie</a> <sup>1,2</sup>,
           </span>
           <span class="author-block">
-            <a href="https://scholar.google.com/citations?user=-ZMMe-UAAAAJ&hl=zh-CN&oi=ao">Chenxing Li</a> <sup>3</sup>,
+            <a href="https://scholar.google.com/citations?user=-ZMMe-UAAAAJ&hl=zh-CN&oi=ao">Chenxing Li</a> <sup>2</sup>,
           </span>
           <span class="author-block">
-            <a href="https://scholar.google.de/citations?user=9cvRM5wAAAAJ&hl=en&oi=ao">Mengyue Wu</a> <sup>2</sup>,
+            <a href="https://scholar.google.de/citations?user=9cvRM5wAAAAJ&hl=en&oi=ao">Mengyue Wu</a> <sup>3</sup>,
           </span>
           <span class="author-block">
             <a href="https://scholar.google.com/citations?user=sfyr7zMAAAAJ&hl=zh-CN&oi=ao">Yuexian Zou</a> <sup>1</sup>
@@ -271,11 +271,11 @@
         </p>
         <p></p>
       </div>
-      
+     
       <div style="text-align: center">
         <span class="author-block"><sup>1</sup> ADSP Lab, Peking University</span>
-        <span class="author-block"><sup>2</sup> X-LANCE Lab, Shanghai Jiao Tong University</span>
-        <span class="author-block"><sup>3</sup> Tencent AI Lab</span>
+        <span class="author-block"><sup>2</sup> Tencent</span>
+        <span class="author-block"><sup>3</sup> X-LANCE Lab, Shanghai Jiao Tong University</span>
         <p></p>
       </div>
       <div style="text-align: center">
@@ -300,145 +300,77 @@
       <b class="custom-color" id="navigation">Navigation Bar.</b>
       <div style="padding-left: 1em;  padding-right: 1em;">
       <div style="text-align: center; background: linear-gradient(135deg, #e8eef9 0%, #e9eee9 100%); margin: 5px auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);">
-        <a href="#overview" class="btn" style="color: #038670;">Data Construction&rArr;</a>
-        <a href="#description" class="btn  fw-bold">1. <u>Task Description</u></a>
-        <a href="#pipeline" class="btn  fw-bold">2. <u>Pipeline</u></a>
-        <a href="#statistic" class="btn  fw-bold">3. <u>Data Statistics</u></a>
-        &emsp;&ensp;|&emsp;&ensp;
-        <a href="#analysis" class="btn" style="color: #038670;">Analysis&rArr;</a>
+        <a href="#pipeline" class="btn  fw-bold">Pipeline</a>
+        <a href="#comparison" class="btn  fw-bold">Comparison</a>
+        <a href="#visualization" class="btn  fw-bold">Visualization</a>
+        <a href="#sample-Genereration" class="btn  fw-bold">Samples</a>
+ 
+        <!-- &emsp;&ensp;|&emsp;&ensp; -->
+        <!-- <a href="#analysis" class="btn" style="color: #038670;">Analysis&rArr;</a>
         <a href="#visualization" class="btn  fw-bold">4. <u>Visualization</u></a>
-        <a href="#limitations" class="btn  fw-bold">5. <u>Model Limitations</u></a>
-      </div>
+        <a href="#limitations" class="btn  fw-bold">5. <u>Model Limitations</u></a> -->
+      <!-- </div>
       </div>
       <br>
-      <b class="custom-color">Deepfake Samples.</b>
+      <b class="custom-color">Generated Samples.</b>
       <br>
-      <div style="padding-left: 1em;  padding-right: 1em;">
+      <div style="padding-left: 10em;  padding-right: 10em;">
       <div style="text-align: center; background: linear-gradient(135deg, #e9eee9 0%, #e8eef9 100%); margin: 5px auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);">
-        <a href="#sample-Genereration" class="btn" style="color: #038670;">Clip-wise&rArr;</a>
-        <a href="#sample-Genereration" class="btn  fw-bold">1. <u>Genereration</u></a>
-        <a href="#sample-Editing" class="btn  fw-bold">2. <u>Editing</u></a>
-        &ensp;|&ensp;
-        <a href="#sample-Inpainting" class="btn" style="color: #038670;">Frame-wise&rArr;</a>
-        <a href="#sample-Inpainting" class="btn  fw-bold">3. <u>Inpainting</u></a>
-        <a href="#sample-Separation" class="btn  fw-bold">4. <u>Separation</u></a>
-        <a href="#sample-Splice" class="btn  fw-bold">5. <u>Splice</u></a>
-        <a href="#sample-Addition" class="btn fw-bold">6. <u>Addition</u></a>
+        <a href="#sample-Genereration" class="btn  fw-bold">Sample 1-5</a>
+        <a href="#sample-Genereration" class="btn  fw-bold">Sample 6-10</a>
       </div>
-      </div>
+      </div> -->
+    </div>
     </div>
     
     <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
         <h2 id="overview" style="text-align: center;" class="custom-color">SemanticVocoder Construction</h2>
         <br>
-        <h3 id="description" class="custom-color">1. Task Description </h3>
+        <div class="subtitle" id="pipeline" class="custom-color">Pipeline</div>
         <br>
-        <div style="text-align: left;  padding-left: 4em;  padding-right: 4em;">
-            The explainable deepfake detection need identify the manipulation method (<b class="custom-color">how</b>), localize the temporal positions of forgery (<b class="custom-color">when</b>), and trace the accountable sources (<b class="custom-color">where</b>).
-        </div>
+        <div style="text-align: left;  padding-left: 1em;  padding-right: 1em;">
+            An overview of SemanticVocoder training, downstream TTA training, and downstream tasks inference.
+            <a style="color: #324398;" class="fw-bold">Blue arrow</a>
+            The SemanticVocoder training: the input audio is fed into a semantic encoder to extract semantic latents, which serve as conditions to train the flow-matching network for waveform prediction.
+            <a style="color: #D45360;" class="fw-bold">Red arrow</a>
+            The audio generative DiT training: the input text is processed by a text encoder to obtain textual features, which are used to train the DiT model for generating semantic latents.
+            <a style="color: #000000;" class="fw-bold">Black arrow</a>
+            Downstream task inference: Equipped with SemanticVocoder, both audio generation and understanding tasks can be performed within the same semantic latent space.
+        <br>
         <br>
         <p style="text-align: center;">
-            <img src="./DemoFile/figures/Fakesound_sample.png" height="160" width="600" class="img-fluid">
+            <img src="./DemoFile/figures/SemanticVocoder-pipe.png" height="160" width="1100" class="img-fluid">
         </p>
         <br>
         <br>
 
-        <h3 id="pipeline" class="custom-color">2. Manipulation Pipeline </h3>
-        <br>
-        <div style="text-align: left; padding-left: 4em;  padding-right: 4em;">
-          <b class="custom-color">(I)</b> A Text-to-Audio grounding model temporally localizes sound events and masks segments;
-          <b class="custom-color">(II)</b> Based on the task type, the LLM generates the target captions and insert event descriptions;
-          <b class="custom-color">(III)</b> Depending on the task requirements, relevant models or scripts are invoked to generate synthetic audio segments; frame-wise forgeries are seamlessly spliced according to the masked regions.
-        </div>
-        <br>
+        <h3 id="comparison" class="subtitle" class="custom-color">Comparison</h3>
         <p style="text-align: center;">
-            <img src="./DemoFile/figures/Fakesound_pipeline.png" height="400" width="1100" class="img-fluid">
+            <img src="./DemoFile/figures/model_radar_8.png" height="400" width="600" class="img-fluid">
         </p>
         <br>
         <br>
 
-        <h3 id="statistic" class="custom-color">3. Data Statistics </h3>
-        <div style="text-align: left; padding-left: 4em;  padding-right: 4em;">
+        <h3 id="visualization"  class="subtitle" class="custom-color">Visualization </h3>
+        <div style="text-align: left; padding-left: 1em;  padding-right: 1em;">
         <br>
-        <div class="subtitle">Statistics</div>
+        Visualization of different latents on HEAR-esc50, where the 10 most frequent categories are presented.
+        Semantic latents exhibit stronger discriminative structure and semantic disentanglement.
         <br>
-        Constructed through an automated pipeline leveraging the AudioCaps dataset, it encompasses <b class="custom-color">6</b> distinct manipulation types derived from <b class="custom-color">12</b> audio sources (<b class="custom-color">11</b> synthetic and <b class="custom-color">1</b> genuine).
-        The dataset ultimately comprises a training set of <b class="custom-color">369,929</b> samples and a test set of <b class="custom-color">5,553</b> samples. 
-        Researchers can flexibly partition the test subset to evaluate generalization, provided that out-of-domain (OOD) sources remain completely unseen during training.
-        <!-- For instance, in our implementation, the test set is divided into 3,896 in-domain and 1,657 OOD samples to systematically benchmark cross-domain detection robustness. -->
-        </div>
         <br>
         <p style="text-align: center;">
-            <img src="./DemoFile/figures/Fakesound_statistic.png" height="400" width="1100" class="img-fluid">
+            <img src="./DemoFile/figures/esc50_embeddings_tsne.png" height="400" width="1100" class="img-fluid">
         </p>
         
-       
-        <div style="text-align: left; padding-left: 4em;  padding-right: 4em;">
-            <div class="subtitle">Metadata</div>
-            <div class="metadata">
-                <h3>The annotation is organized as:</h3>
-            
-                <div class="code-block" style="line-height: 2;">
-                    <span style="color: #b5b5b5;">// Dictionary Structure</span><br>
-                    {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>fake_type</strong>": "Inpainting", <span style="color: #b5b5b5;">// Type of manipulation (e.g., inpainting, editing, ...)</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>model</strong>": "AudioLDM2", <span style="color: #b5b5b5;">// Source of the manipulated audio (e.g., AudioLDM2, Tango2, ...)</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>audio_id</strong>": "xxxxxxxxx", <span style="color: #b5b5b5;">// file ID</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>onset_offset</strong>": "2-3_5.5-6", <span style="color: #b5b5b5;">// Temporal timestamps of the forged segments</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>filepath</strong>": "data/test/audio/inpainting_ldm2/xxxxxxxxx.wav", <span style="color: #b5b5b5;">// Filepath to the audio file</span><br>  
-                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>target_caption</strong>": "a man talks, a dog barks", <span style="color: #b5b5b5;">// Target caption generated by LLMs or rule-based scripts</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>add_event / splice_event</strong>": "a dog barks", <span style="color: #b5b5b5;">// Selected event to be inserted (Optional, in addition, splice, editing)</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;"<strong>delete_event</strong>": "a sprayer sprays", <span style="color: #b5b5b5;">// Deleted event in original caption (Optional, in separation, addition, splice, editing)</span><br>
-                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;"<strong>original_caption</strong>":"a man talks, a sprayer sprays", <span style="color: #b5b5b5;">// Original caption in AudioCaps</span><br> -->
-                  }
-                </div>
-            </div>
-        </div>
+       </div>
+       </div>
 
     </div>
 
-    <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
-        <h2 id="analysis" style="text-align: center;" class="custom-color">Analysis</h2>
-        <br>
-
-        <h3 id="visualization" class="custom-color">4. Feature Visualization </h3>
-        <br>
-        <div style="text-align: left; padding-left: 4em;  padding-right: 4em;">
-          Overall, the current model exhibits reliable separability between authentic and manipulated audio, enabling <b class="custom-color">effective binary classification</b>. 
-          However, certain forged audio categories demonstrate substantial overlap in the feature space, which <b class="custom-color">diminishes explainability</b> for source attribution.
-        </div>
-        <br>
-        <p style="text-align: center;">
-            <img src="./DemoFile/figures/Fakesound_visualization.png" height="400" width="1100" class="img-fluid">
-        </p>
-        <br>
-        <br> 
-        
-        <h3 id="limitations" class="custom-color">5. Limitations and Challenges of Current Models </h3>
-        <br>
-        <div style="text-align: left; padding-left: 3em;  padding-right: 3em;">
-          Although current models perform well in binary classification, they exhibit the following shortcomings:
-          <br> 
-          <br> 
-          <ul>
-            <li>
-            <span class="custom-color">Limitation&rArr;</span> Difficulty in distinguishing between deepfake audio generated by similar manipulation frameworks.
-            <br> 
-            <span class="custom-color">Challenge&rArr;</span> enable models to capture fine-grained distributional discrepancies.
-            </li>
-            <br> 
-            <li>
-            <span class="custom-color">Limitation&rArr;</span> Limited generalization capability. 
-            <br> 
-            <span class="custom-color">Challenge&rArr;</span> enable models to characterize the true data distribution of authentic audio rather than memorizing artificial forgery patterns.
-            </li>
-          </ul>
-        </div>
-    </div>
-
+    
 
     <div class="container pb-0 shadow p-5 mb-5 bg-white rounded">
-      <h2 id="sample-Genereration" class="custom-color"> Deepfake Samples </h2>
+      <h2 id="sample-Genereration" class="custom-color"> Generated Samples </h2>
       <p class="mb-0">
       <br>
 
