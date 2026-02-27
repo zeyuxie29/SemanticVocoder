@@ -243,8 +243,6 @@
         });
     </script>
 
-    
-
     <div class="container pt-5 mt-5 shadow p-4 mb-5 bg-white rounded" id="top">
       <div class="text-center">
         <div style="display: flex; align-items: center; justify-content: center;">
@@ -252,48 +250,59 @@
         </div>
         <h3>Bridging Audio Generation and Audio Understanding via Semantic Latents</h3>
         <p class="lead fw-bold">
-          | <a href="" target="_blank" class="btn fw-bold">Paper</a> 
+          | <a href="https://arxiv.org/abs/2602.23333" target="_blank" class="btn fw-bold">Paper</a> 
           | <a href="https://github.com/zeyuxie29/SemanticVocoder" class="btn fw-bold" target="_blank" rel="noopener noreferrer">Code</a> 
           |
         </p>
-        <!-- <p class="fst-italic mb-0">
+        <p class="fst-italic mb-0">
           <span class="author-block">
-            <a href="https://scholar.google.de/citations?user=LzSAnHMAAAAJ&hl=en&oi=ao" >Zeyu Xie</a> <sup>1,2</sup>,
+            <a href="https://scholar.google.de/citations?user=LzSAnHMAAAAJ&hl=en&oi=ao" target="_blank">Zeyu Xie</a><sup>1,2</sup>,
           </span>
           <span class="author-block">
-            <a href="https://scholar.google.com/citations?user=-ZMMe-UAAAAJ&hl=zh-CN&oi=ao">Chenxing Li</a> <sup>2</sup>,
+            Chenxing Li<sup>2</sup>,
           </span>
           <span class="author-block">
-            <a href="https://scholar.google.de/citations?user=LzSAnHMAAAAJ&hl=en&oi=ao" >Xuenan Xu</a> <sup>4</sup>,
+            Qiao Jin<sup>1</sup>,
           </span>
           <span class="author-block">
-            <a href="https://scholar.google.de/citations?user=9cvRM5wAAAAJ&hl=en&oi=ao">Mengyue Wu</a> <sup>3</sup>,
+            Xuenan Xu<sup>3</sup>,
           </span>
           <span class="author-block">
-            <a href="https://scholar.google.com/citations?user=sfyr7zMAAAAJ&hl=zh-CN&oi=ao">Yuexian Zou</a> <sup>1</sup>
+            Guanrou Yang<sup>2,4</sup>,
           </span>
-        </p> -->
-        <p></p>
+          <span class="author-block">
+            Wenfu Wang<sup>2</sup>,
+          </span>
+          <span class="author-block">
+            Mengyue Wu<sup>4</sup>,
+          </span>
+          <span class="author-block">
+            Dong Yu<sup>2</sup>,
+          </span>
+          <span class="author-block">
+            Yuexian Zou<sup>1,*</sup>
+          </span>
+        </p>
       </div>
      
-      <!-- <div style="text-align: center">
-        <span class="author-block"><sup>1</sup> ADSP Lab, Peking University</span>
-        <span class="author-block"><sup>2</sup> Tencent</span>
-        <span class="author-block"><sup>3</sup> X-LANCE Lab, Shanghai Jiao Tong University</span>
-        <span class="author-block"><sup>4</sup> Shanghai AI lab</span>
+      <div style="text-align: center">
+        <span class="author-block"><sup>1</sup>ADSP Lab, Peking University</span>
+        <span class="author-block"><sup>2</sup>Tencent</span>
+        <span class="author-block"><sup>3</sup>Shanghai AI lab</span>
+        <span class="author-block"><sup>4</sup>X-LANCE Lab, SJTU</span>
         <p></p>
-      </div> -->
+      </div>
       <div style="text-align: center">
         <i>zeyuxie25@stu.pku.edu.cn</i>
       </div>
       <p>
         <b><p class="custom-color">Abstract.</p></b>  
         <p style="padding-left: 1em;  padding-right: 1em;">
-          Existing audio generation models typically rely on VAEs (Variational Autoencoders) and perform generation within the VAE latent space.
-          Although VAEs excel at compression and reconstruction, their latents naturally encapsulate low-level acoustic details rather than semantically discriminative information, leading to entangled event semantics and complicating the training of generative models.
-          To address these issues, we discard VAE acoustic latents and introduce semantic encoder latents, and thus propose <b class="custom-color">SemanticVocoder</b>, a generative vocoder which directly synthesizes waveforms from semantic latents.
-          Equipped with SemanticVocoder, our text-to-audio generation model achieves a lowest Fréchet Distance and Fréchet Audio Distance scores on the AudioCaps test set, as the introduced semantic latents exhibit better discriminability than the acoustic VAE latents.
-          While achieving better generation performance, it also serves as a promising trial toward unifying understanding and generation within shared semantic space.
+          Recent audio generation models typically rely on  Variational Autoencoders (VAEs) and perform generation within the VAE latent space.
+          Although VAEs excel at compression and reconstruction, their latents inherently encode low-level acoustic details rather than semantically discriminative information, leading to entangled event semantics and complicating the training of generative models.
+          To address these issues, we discard VAE acoustic latents and introduce semantic encoder latents, thereby proposing <span  class="custom-color">SemanticVocoder</span>, a generative vocoder that directly synthesizes waveforms from semantic latents.
+          Equipped with SemanticVocoder, our text-to-audio generation model achieves a Fréchet Distance of <span class="custom-color">12.823</span> and a Fréchet Audio Distance of <span class="custom-color">1.709</span> on the AudioCaps test set, as the introduced semantic latents exhibit superior discriminability compared to acoustic VAE latents.
+          Beyond improved generation performance, it also serves as a promising attempt towards <span class="custom-color">unifying audio understanding and generation within a shared semantic space</span>.
           </p>
       </p>
       <br>
@@ -314,43 +323,53 @@
         <div class="subtitle" id="pipeline" class="custom-color">Pipeline</div>
         <br>
         <div style="text-align: left;  padding-left: 1em;  padding-right: 1em;">
-            An overview of SemanticVocoder training, downstream TTA training, and downstream tasks inference.
-            <a style="color: #324398;" class="fw-bold">Blue arrow</a>
-            The SemanticVocoder training: the input audio is fed into a semantic encoder to extract semantic latents, which serve as conditions to train the flow-matching network for waveform prediction.
-            <a style="color: #D45360;" class="fw-bold">Red arrow</a>
-            The audio generative DiT training: the input text is processed by a text encoder to obtain textual features, which are used to train the DiT model for generating semantic latents.
-            <a style="color: #000000;" class="fw-bold">Black arrow</a>
-            Downstream task inference: Equipped with SemanticVocoder, both audio generation and understanding tasks can be performed within the same semantic latent space.
-        <br>
-        <br>
-        <p style="text-align: center;">
-            <img src="./DemoFile/figures/SemanticVocoder-pipe.png" height="160" width="1100" class="img-fluid">
-        </p>
-        <br>
-        <br>
+          An overview of SemanticVocoder training, downstream TTA training, and downstream task inference.
+          <a style="color: #324398;" class="fw-bold">Blue arrow</a>
+          SemanticVocoder training: the input audio is fed into a semantic encoder to extract semantic latents, which serve as conditions to train the flow-matching network for waveform prediction.
+          <a style="color: #D45360;" class="fw-bold">Red arrow</a>
+          Generative audio DiT training: the input text is processed by a text encoder to obtain textual features, which are used to train the DiT model for generating semantic latents.
+          <a style="color: #000000;" class="fw-bold">Black arrow</a>
+          Downstream task inference: equipped with SemanticVocoder, both audio generation and understanding tasks can be performed within the same semantic latent space.
+          <br>
+          <br>
+          <p style="text-align: center;">
+              <img src="./DemoFile/figures/SemanticVocoder-pipe.png" height="160" width="1100" class="img-fluid">
+          </p>
+          <br>
+          <br>
+        </div>
 
         <h3 id="comparison" class="subtitle" class="custom-color">Comparison</h3>
-        <p style="text-align: center;">
-            <img src="./DemoFile/figures/model_radar.png" height="400" width="600" class="img-fluid">
-        </p>
-        <p style="text-align: center;">
-            <img src="./DemoFile/figures/result.png" height="400" width="1000" class="img-fluid">
-        </p>
-        <br>
-        <br>
+        <div style="text-align: left;  padding-left: 1em;  padding-right: 1em;">
+          The SemanticVocoder pioneers the generation of waveforms directly from semantic latents, thereby bridging understanding-oriented representations and generation tasks.
+          <a style="color: #4A90E2;" class="fw-bold">Left</a>
+          Three sub-tasks from the HEAR benchmark are employed to evaluate the latent representations, in which linear classifiers are trained on fixed latents.
+          The semantic latents exhibit a more discriminative semantic structure than the acoustic VAE latents used in previous work.
+          <a style="color: #1E3A8A;" class="fw-bold">Right</a>
+          For the downstream text-to-audio task, a text-to-latent model predicts latents conditioned on input text.
+          The predicted latents are then fed into SemanticVocoder for audio synthesis, yielding superior performance.
+          <br>
+          <p style="text-align: center;">
+              <img src="./DemoFile/figures/model_radar.png" height="400" width="600" class="img-fluid">
+          </p>
+          <p style="text-align: center;">
+              <img src="./DemoFile/figures/result.png" height="400" width="1000" class="img-fluid">
+          </p>
+          <br>
+          <br>
 
-        <h3 id="visualization"  class="subtitle" class="custom-color">Visualization </h3>
-        <div style="text-align: left; padding-left: 1em;  padding-right: 1em;">
-        <br>
-        Visualization of different latents on HEAR-esc50, where the 10 most frequent categories are presented.
-        Semantic latents exhibit stronger discriminative structure and semantic disentanglement.
-        <br>
-        <br>
-        <p style="text-align: center;">
-            <img src="./DemoFile/figures/esc50_embeddings_tsne.png" height="400" width="1100" class="img-fluid">
-        </p>
-        
-       </div>
+          <h3 id="visualization"  class="subtitle" class="custom-color">Visualization </h3>
+          <div style="text-align: left; padding-left: 1em;  padding-right: 1em;">
+          <br>
+          Visualization of different latents on HEAR-ESC50, where the 10 most frequent categories are presented.
+          Each audio feature is aggregated by mean pooling along the temporal axis and projected into 2D space via t-SNE.
+          Compared to VAE acoustic latents used in baseline models, semantic latents exhibit a more discriminative structure and superior semantic disentanglement.
+          <br>
+          <br>
+          <p style="text-align: center;">
+              <img src="./DemoFile/figures/esc50_embeddings_tsne.png" height="400" width="1100" class="img-fluid">
+          </p>
+        </div>
        </div>
 
     </div>
