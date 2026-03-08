@@ -21,13 +21,22 @@ The core advantages are:
 <a id="inference"></a>
 
 ## Inference
-Clone the repository & Install dependencies (you may need to adjust the PyTorch version in *build_env.sh* to match your hardware):
+#### Clone the repository:
+> [!IMPORTANT]
+> Use *--single-branch --branch main* or *--depth=1* to avoid downloading oversized files.
 ```shell
-git clone https://github.com/zeyuxie29/SemanticVocoder
+git clone --single-branch --branch main https://github.com/zeyuxie29/SemanticVocoder
+or
+git clone --depth=1 https://github.com/zeyuxie29/SemanticVocoder
+```
+#### Install dependencies:
+> [!NOTE]
+> you may need to adjust the PyTorch version in *build_env.sh* to match your hardware
+```shell
 cd SemanticVocoder/src/inference
 sh bash_scripts/build_env.sh
 ```
-Run inference:
+#### Run inference:
 ```shell
 sh bash_scripts/infer.sh
 ```
