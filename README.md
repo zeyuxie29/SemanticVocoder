@@ -20,7 +20,7 @@ The core advantages are:
 
 <a id="inference"></a>
 
-## Inference
+## Text-to-Audio Generation Inference
 #### Clone the repository:
 > [!IMPORTANT]
 > Use *--single-branch --branch main* or *--depth=1* to avoid downloading oversized files.
@@ -45,6 +45,7 @@ sh bash_scripts/infer.sh
 
 ## TODO List
 - [x] Add demo page
-- [x] Release inference code and usage instructions
+- [x] Release text-to-audio generation inference code and usage instructions
+- [ ] Release vocoder inference module (responsible for encoding latent representations and decoding)
 - [ ] Release vocoder training code
 - [ ] Release text-to-audio generation training code
