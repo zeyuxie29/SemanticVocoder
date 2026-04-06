@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0034)https://zeyuxie29.github.io/SemanticVocoder/ -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>SemanticVocoder</title>
+    <title>SARA</title>
     <link href="./DemoFile/bootstrap.min.css" rel="stylesheet">
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -197,7 +197,7 @@
     <link rel="icon" type="image/svg+xml" href="./DemoFile/favicon/favicon.svg" />
     <link rel="shortcut icon" href="./DemoFile/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="./DemoFile/favicon/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="SemanticVocoder" />
+    <meta name="apple-mobile-web-app-title" content="SARA" />
     <link rel="manifest" href="./DemoFile/favicon/site.webmanifest" />
 
   </head>
@@ -246,9 +246,9 @@
     <div class="container pt-5 mt-5 shadow p-4 mb-5 bg-white rounded" id="top">
       <div class="text-center">
         <div style="display: flex; align-items: center; justify-content: center;">
-          <h1 style="margin-right: 20px;"><span class="custom-color">SemanticVocoder</span></h1>  
+          <h1 style="margin-right: 20px;"><span class="custom-color">SARA</span></h1>  
         </div>
-        <h3>Bridging Audio Generation and Audio Understanding via Semantic Latents</h3>
+        <h3>Semantic Representation Generative Autoencoder for Text-to-Audio Generation without Variational Autoencoder</h3>
         <p class="lead fw-bold">
           | <a href="https://arxiv.org/abs/2602.23333" target="_blank" class="btn fw-bold">Paper</a> 
           | <a href="https://github.com/zeyuxie29/SemanticVocoder" class="btn fw-bold" target="_blank" rel="noopener noreferrer">Code</a> 
@@ -298,12 +298,16 @@
       <p>
         <b><p class="custom-color">Abstract.</p></b>  
         <p style="padding-left: 1em;  padding-right: 1em;">
-          Recent audio generation models typically rely on  Variational Autoencoders (VAEs) and perform generation within the VAE latent space.
-          Although VAEs excel at compression and reconstruction, their latents inherently encode low-level acoustic details rather than semantically discriminative information, leading to entangled event semantics and complicating the training of generative models.
-          To address these issues, we discard VAE acoustic latents and introduce semantic encoder latents, thereby proposing <span  class="custom-color">SemanticVocoder</span>, a generative vocoder that directly synthesizes waveforms from semantic latents.
-          Equipped with SemanticVocoder, our text-to-audio generation model achieves a Fréchet Distance of <span class="custom-color">12.823</span> and a Fréchet Audio Distance of <span class="custom-color">1.709</span> on the AudioCaps test set, as the introduced semantic latents exhibit superior discriminability compared to acoustic VAE latents.
-          Beyond improved generation performance, it also serves as a promising attempt towards <span class="custom-color">unifying audio understanding and generation within a shared semantic space</span>.
-          </p>
+        Text-to-audio generation aims to synthesize corresponding audio clips conditioned on textual inputs.
+        Recent text-to-audio generation systems typically rely on Variational Autoencoders (VAEs), performing text-to-latent and latent-to-waveform synthesis within the VAE latent space.
+        Although VAEs excel at compression and reconstruction, their latent representations inherently encode low-level acoustic details rather than semantically discriminative information, leading to entangled event semantics and complicating the training of text-to-latent prediction.
+        In contrast, the semantic latents extracted by the semantic representation encoder possess well-structured discriminability, making text-to-latent mappings easier to establish. 
+        Accordingly, we discard the VAE module and propose <span  class="custom-color">SARA</span>, a novel semantic driven generative autoencoder. 
+        It leverages semantic latents and adopts a generative architecture rather than conventional reconstruction-based training for alleviating distortion.
+        SARA ultimately enables audio generation to be performed directly in the semantically rich latent space, yielding a novel text-to-audio generation system that is entirely independent of acousitc-based VAEs.
+        As a result, our text-to-audio generation system achieves the lowest Fréchet Distance and Fréchet Audio Distance on both the AudioCaps test set and the cross-domain Clotho test set.
+        Beyond improved generation performance, SARA also serves as a promising attempt towards <span class="custom-color">unifying audio understanding and generation within a shared latent space</span>.
+        </p>
       </p>
       <br>
       <b class="custom-color" id="navigation">Navigation Bar.</b>
@@ -318,18 +322,18 @@
     </div>
     
     <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
-        <h2 id="overview" style="text-align: center;" class="custom-color">SemanticVocoder Construction</h2>
+        <h2 id="overview" style="text-align: center;" class="custom-color">SARA Construction</h2>
         <br>
         <div class="subtitle" id="pipeline" class="custom-color">Pipeline</div>
         <br>
         <div style="text-align: left;  padding-left: 1em;  padding-right: 1em;">
-          An overview of SemanticVocoder training, downstream TTA training, and downstream task inference.
+          An overview of the SARA autoencoder training, text-to-latent DiT training, and inference pipeline.
           <a style="color: #324398;" class="fw-bold">Blue arrow</a>
-          SemanticVocoder training: the input audio is fed into a semantic encoder to extract semantic latents, which serve as conditions to train the flow-matching network for waveform prediction.
+          SARA training: the input audio is fed into SARA semantic encoder to extract semantic latents, which serve as conditions to train SARA flow-matching-based deocder for latent-to-waveform prediction.
           <a style="color: #D45360;" class="fw-bold">Red arrow</a>
-          Generative audio DiT training: the input text is processed by a text encoder to obtain textual features, which are used to train the DiT model for generating semantic latents.
+          Generative audio DiT training: the input text is processed by a text encoder to obtain textual features, which are used to train the DiT model for text-to-semantic-latents generating.
           <a style="color: #000000;" class="fw-bold">Black arrow</a>
-          Downstream task inference: equipped with SemanticVocoder, both audio generation and understanding tasks can be performed within the same semantic latent space.
+          Downstream task inference: equipped with SARA, both audio generation and understanding tasks can be performed within the same semantic latent space.
           <br>
           <br>
           <p style="text-align: center;">
@@ -341,13 +345,13 @@
 
         <h3 id="comparison" class="subtitle" class="custom-color">Comparison</h3>
         <div style="text-align: left;  padding-left: 1em;  padding-right: 1em;">
-          The SemanticVocoder pioneers the generation of waveforms directly from semantic latents, thereby bridging understanding-oriented representations and generation tasks.
+          The SARA pioneers the generation of waveforms directly from semantic latents, thereby bridging understanding-oriented representations and generation tasks.
           <a style="color: #4A90E2;" class="fw-bold">Left</a>
           Three sub-tasks from the HEAR benchmark are employed to evaluate the latent representations, in which linear classifiers are trained on fixed latents.
           The semantic latents exhibit a more discriminative semantic structure than the acoustic VAE latents used in previous work.
           <a style="color: #1E3A8A;" class="fw-bold">Right</a>
           For the downstream text-to-audio task, a text-to-latent model predicts latents conditioned on input text.
-          The predicted latents are then fed into SemanticVocoder for audio synthesis, yielding superior performance.
+          The predicted latents are then fed into SARA for audio synthesis, yielding superior performance.
           <br>
           <p style="text-align: center;">
               <img src="./DemoFile/figures/model_radar.png" height="400" width="600" class="img-fluid">
@@ -568,7 +572,7 @@
     </div> -->
       
     <footer>
-      &copy; 2026 SemanticVocoder
+      &copy; 2026 SARA
     </footer>
 
   
